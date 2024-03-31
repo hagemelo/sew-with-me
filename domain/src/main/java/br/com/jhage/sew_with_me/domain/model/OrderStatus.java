@@ -1,4 +1,4 @@
-package br.com.jhage.sew_with_me.domain.helper;
+package br.com.jhage.sew_with_me.domain.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -14,26 +14,27 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @since 30/03/2024
  *
  */
-public enum TypePayment implements Serializable {
+public enum OrderStatus implements Serializable {
 
-	PIX("PIX"), 
-	DINHEIRO("DINHEIRO");
+	ABERTO("ABERTO"), 
+	ATRASADO("ATRASADO"),
+	CANCELADO("CANCELADO");
 
-	private static Map<String, TypePayment> namesMap = new HashMap<String, TypePayment>();
+	private static Map<String, OrderStatus> namesMap = new HashMap<String, OrderStatus>();
 
 	private final String descricao;
 
-	TypePayment(final String descricao) {
+	OrderStatus(final String descricao) {
 
 		this.descricao = descricao;
 	}
 
-	public static TypePayment get(String find) {
+	public static OrderStatus get(String find) {
 
-		TypePayment result = DINHEIRO;
+		OrderStatus result = ABERTO;
 		try {
 
-			result = valueOf(TypePayment.class, find);
+			result = valueOf(OrderStatus.class, find);
 		} catch (IllegalArgumentException e) {
 
 			System.out.println("TypeSew Nao Encontrado");
@@ -42,9 +43,9 @@ public enum TypePayment implements Serializable {
 	}
 
 	@JsonCreator
-	public static TypePayment forValue(String value) {
+	public static OrderStatus forValue(String value) {
 		
-		for (TypePayment enumConstant : TypePayment.class.getEnumConstants()) {
+		for (OrderStatus enumConstant : OrderStatus.class.getEnumConstants()) {
 			
 			namesMap.put(enumConstant.descricao, enumConstant);
 		}
@@ -54,7 +55,7 @@ public enum TypePayment implements Serializable {
 
 	@JsonValue
 	public String toValue() {
-		for (Entry<String, TypePayment> entry : namesMap.entrySet()) {
+		for (Entry<String, OrderStatus> entry : namesMap.entrySet()) {
 			if (entry.getValue() == this)
 				return entry.getKey();
 		}

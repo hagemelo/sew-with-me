@@ -5,7 +5,6 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import br.com.jhage.sew_with_me.domain.helper.TypePayment;
 import br.com.jhage.sew_with_me.domain.helper.ValoresConstante;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

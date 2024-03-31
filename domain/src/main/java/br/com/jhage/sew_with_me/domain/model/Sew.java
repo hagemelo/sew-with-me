@@ -7,8 +7,6 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import br.com.jhage.sew_with_me.domain.helper.SewStatus;
-import br.com.jhage.sew_with_me.domain.helper.TypeSew;
 import br.com.jhage.sew_with_me.domain.helper.ValoresConstante;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

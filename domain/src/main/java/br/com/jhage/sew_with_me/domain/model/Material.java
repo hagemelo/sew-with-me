@@ -1,6 +1,5 @@
 package br.com.jhage.sew_with_me.domain.model;
 
-import br.com.jhage.sew_with_me.domain.helper.Unit;
 import br.com.jhage.sew_with_me.domain.helper.ValoresConstante;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

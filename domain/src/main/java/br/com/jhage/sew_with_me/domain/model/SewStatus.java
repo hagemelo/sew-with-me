@@ -1,4 +1,4 @@
-package br.com.jhage.sew_with_me.domain.helper;
+package br.com.jhage.sew_with_me.domain.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
