@@ -62,7 +62,7 @@ public class Sew implements JhageEntidade {
 	private Double value;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(mappedBy = "sew", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private Set<MaterialUsed> materials;
 	
 

@@ -21,13 +21,17 @@ public class AwsSqsConfig {
 
     @Value("${aws.secretKey}")
     private String secretKey;
+    
+    
+    @Value("${aws.default.region}")
+    private String awsRegion;
 
     @Bean
     public AmazonSQS amazonSQS() {
         BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
         return AmazonSQSClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(sqsEndpoint, "us-east-1")) // Change region accordingly
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(sqsEndpoint, awsRegion))
                 .build();
     }
 
