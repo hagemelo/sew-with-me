@@ -17,6 +17,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -65,6 +66,10 @@ public class Sew implements JhageEntidade {
 	@OneToMany(mappedBy = "sew", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private Set<MaterialUsed> materials;
 	
+	@JsonBackReference
+	@ManyToOne
+	private Order order;
+	
 
 	Sew() {
 	}
@@ -80,7 +85,19 @@ public class Sew implements JhageEntidade {
 	
 	public void addMaterials (MaterialUsed material) {
 
+		if (this.materials != null) {
+			this.materials = new HashSet<MaterialUsed>();
+		}
+		
 		this.materials.add(material);
+	}
+	
+	public Sew addOrder (Order order) {
+
+		if (order != null) {
+			this.order = order;
+		}
+		return this;
 	}
 
 	@Override

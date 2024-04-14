@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum TypeSew implements Serializable {
 
-	REPARO, AJUSTE, NOVO;
+	REPARO, AJUSTE, NOVO, TRANSFORMCAO;
 
 	private static Map<String, TypeSew> namesMap = new HashMap<String, TypeSew>();
 

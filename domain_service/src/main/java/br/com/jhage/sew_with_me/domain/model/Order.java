@@ -64,14 +64,14 @@ public class Order implements JhageEntidade {
 	@ManyToOne
 	private Client client;
 	
-	@JsonBackReference
+	@JsonBackReference(value="sew")
 	@ManyToOne
 	private Sew sew;
 	
 	Order() {
 	}
 
-	public Order(String type, Date deliveryForecast, Double value) {
+	public Order( Date deliveryForecast, Double value) {
 
 		this.created_at =  new Date();
 		this.value = value == null ? ValoresConstante.DOUBLE_ZERO : value;

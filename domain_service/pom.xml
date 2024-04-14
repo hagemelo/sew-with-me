@@ -4,8 +4,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.jhage.sew-with-me</groupId>
-	<artifactId>domain</artifactId>
-	<name>domain</name>
+	<artifactId>domain_service</artifactId>
+	<name>domain_service</name>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
@@ -71,18 +71,32 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-json</artifactId>
+		</dependency>
+		
+		<dependency>
 		    <groupId>org.postgresql</groupId>
 		    <artifactId>postgresql</artifactId>
 		    <version>42.6.0</version>
 		</dependency>
-		
+	
 		<dependency>
-		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk-sqs</artifactId>
-		    <version>1.12.139</version> <!-- Use the latest version -->
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<dependency>
+			<groupId>net.minidev</groupId>
+			<artifactId>json-smart</artifactId>
+			<version>2.4.7</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.13.2</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

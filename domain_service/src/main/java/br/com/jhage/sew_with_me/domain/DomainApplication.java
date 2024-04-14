@@ -1,5 +1,7 @@
 package br.com.jhage.sew_with_me.domain;
 
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,9 +12,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class DomainApplication {
+public class DomainApplication implements ApplicationRunner{
 
 	public static void main(String[] args) {
 		SpringApplication.run(DomainApplication.class, args).close();
+	}
+
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
+			
+		System.in.read();
 	}
 }

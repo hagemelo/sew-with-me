@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum TypePayment implements Serializable {
 
 	PIX("PIX"), 
-	DINHEIRO("DINHEIRO");
+	DINHEIRO("DINHEIRO"),
+	AGENDADO("AGENDADO");
 
 	private static Map<String, TypePayment> namesMap = new HashMap<String, TypePayment>();
 
