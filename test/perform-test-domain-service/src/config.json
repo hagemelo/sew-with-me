@@ -1,0 +1,15 @@
+{
+    "executor": "ramping-arrival-rate",
+    "stages": [
+      {
+        "duration": "1m",
+        "target": 1
+      }
+    ],
+    "thresholds": {
+      "http_req_duration": [
+        "avg<1500",
+        "p(95)<2000"
+      ]
+    }
+  }

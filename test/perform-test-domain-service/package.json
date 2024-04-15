@@ -1,0 +1,16 @@
+{
+  "name": "perform-test-domain-service",
+  "version": "1.0.0",
+  "description": "code to developed performance test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "k6 run --out statsd -e TARGET_HOST=http://localhost:8080 --config src/config.json src/load-test.js"
+  },
+  "author": "hagemelohttps://github.com/hagemelo",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@types/k6": "^0.50.0"
+  }
+}
