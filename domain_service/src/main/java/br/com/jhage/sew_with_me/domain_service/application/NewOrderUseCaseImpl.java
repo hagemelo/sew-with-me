@@ -28,6 +28,12 @@ public class NewOrderUseCaseImpl implements NewOrderUseCase{
 	
 	NewOrderUseCaseImpl(){}
 	
+	NewOrderUseCaseImpl(OrderRepository repository, ClientRepository clientRepository){
+		
+		this.repository = repository;
+		this.clientRepository = clientRepository;
+	}
+
 	@Override
 	public Order execute(Order order) throws OrderException {
 		
