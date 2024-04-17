@@ -5,7 +5,9 @@ import org.springframework.stereotype.Component;
 
 import br.com.jhage.sew_with_me.domain_service.domain.NewOrderUseCase;
 import br.com.jhage.sew_with_me.domain_service.exception.OrderException;
+import br.com.jhage.sew_with_me.domain_service.model.Client;
 import br.com.jhage.sew_with_me.domain_service.model.Order;
+import br.com.jhage.sew_with_me.domain_service.repository.ClientRepository;
 import br.com.jhage.sew_with_me.domain_service.repository.OrderRepository;
 
 /***
@@ -21,11 +23,15 @@ public class NewOrderUseCaseImpl implements NewOrderUseCase{
 	@Autowired
 	private OrderRepository repository;
 	
+	@Autowired
+	private ClientRepository clientRepository;
+	
 	NewOrderUseCaseImpl(){}
 	
-	NewOrderUseCaseImpl(OrderRepository repository){
+	NewOrderUseCaseImpl(OrderRepository repository, ClientRepository clientRepository){
 		
 		this.repository = repository;
+		this.clientRepository = clientRepository;
 	}
 
 	@Override
@@ -38,6 +44,10 @@ public class NewOrderUseCaseImpl implements NewOrderUseCase{
 		if (order.getSews()==null || order.getSews().isEmpty()) {
 			throw new OrderException("Order without sew");
 		}
+		// Verificar se o Cliente Ja existe
+		Client client = clientRepository.loadByName(order.getClient().getName());
+		order = order.addClient(client!=null? client: order.getClient());
+		
 		Order result = repository.save(order);
 		return result;
 	}

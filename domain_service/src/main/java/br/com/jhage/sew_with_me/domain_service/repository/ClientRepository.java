@@ -1,6 +1,8 @@
 package br.com.jhage.sew_with_me.domain_service.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.com.jhage.sew_with_me.domain_service.model.Client;
@@ -14,5 +16,10 @@ import br.com.jhage.sew_with_me.domain_service.model.Client;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long>{
+	
+	@Query("select c " +
+		   "from Client c "+
+		   "where name like '%'+ :name + '%' limit 1")
+	public Client loadByName(@Param("name") String name);
 
 }
