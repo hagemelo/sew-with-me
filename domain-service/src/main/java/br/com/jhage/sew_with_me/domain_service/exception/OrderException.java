@@ -11,7 +11,7 @@ public class OrderException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	
-	private static final String DEFAULT= "ERRRO_ACAO_ABRUPTA";
+	private static final String DEFAULT= "ERROR_ACTION_ABRUPT";
 
 	public Logger inicializarLogger() {
 		return LogManager.getLogger(OrderException.class);

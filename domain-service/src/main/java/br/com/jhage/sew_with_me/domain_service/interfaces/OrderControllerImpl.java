@@ -26,7 +26,6 @@ public class OrderControllerImpl implements OrderController{
 	@Autowired
 	private NewOrderUseCase useCase;
 	
-	
 	@ExceptionHandler(OrderException.class)
 	public  ResponseEntity<RespostaErro> campoObrigatorioExceptionHandler(OrderException ex){
 		return ex.respostaErro();
@@ -34,9 +33,10 @@ public class OrderControllerImpl implements OrderController{
 	
 	@PostMapping(path= "/newOrder")
 	@Transactional
-	public @ResponseBody Order newOrder(@RequestBody Order order) throws OrderException{
+	public @ResponseBody ResponseEntity<Order> newOrder(@RequestBody Order order) throws OrderException{
 		
-		return this.useCase.execute(order);
+		Order result =  this.useCase.execute(order);
+		return ResponseEntity.ok(result);
 	}
 
 }

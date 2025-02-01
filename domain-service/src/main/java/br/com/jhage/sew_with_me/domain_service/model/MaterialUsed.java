@@ -14,7 +14,7 @@ import br.com.jhage.sew_with_me.domain_service.helper.ValoresConstante;
  */
 
 @Entity
-@Table
+@Table(name = "tb_material_used")
 public class MaterialUsed implements JhageEntidade {
 
 	private static final long serialVersionUID = 1L;
@@ -34,9 +34,11 @@ public class MaterialUsed implements JhageEntidade {
 	private Unit unit;
 	
 	@ManyToOne
+	@JoinColumn(name = "material_id", nullable = false)
 	private Material material;
 	
-	@ManyToOne
+	@ManyToOne 
+	@JoinColumn(name = "sew_id", nullable = false)
 	private Sew sew;
 	
 	

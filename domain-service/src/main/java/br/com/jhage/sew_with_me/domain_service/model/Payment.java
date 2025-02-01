@@ -18,7 +18,7 @@ import br.com.jhage.sew_with_me.domain_service.helper.ValoresConstante;
  */
 
 @Entity
-@Table
+@Table(name = "tb_payment")
 public class Payment implements JhageEntidade {
 
 	private static final long serialVersionUID = 1L;
@@ -31,11 +31,11 @@ public class Payment implements JhageEntidade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonFormat(pattern = "dd/MM/YYYY")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone="GMT-3")
 	@Temporal(TemporalType.DATE)
 	private Date created_at;
 	
-	@JsonFormat(pattern = "dd/MM/YYYY")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone="GMT-3")
 	@Temporal(TemporalType.DATE)
 	private Date payment_date;
 	

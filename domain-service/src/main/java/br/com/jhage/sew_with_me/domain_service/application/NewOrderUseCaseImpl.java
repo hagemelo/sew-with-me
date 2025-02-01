@@ -33,24 +33,36 @@ public class NewOrderUseCaseImpl implements NewOrderUseCase{
 		this.repository = repository;
 		this.clientRepository = clientRepository;
 	}
+	
+	private Client prepareClient(final Client client) {
+		
+		Client prepareClient =  clientRepository.loadByName(client.getName());
+		if(prepareClient==null) {
+			prepareClient = clientRepository.save(client);
+		}
+		return prepareClient;
+	}
 
 	@Override
 	public Order execute(Order order) throws OrderException {
-		
+
 		order.setNotNull();
-		if (order.getClient()==null) {
+		if (order.getClient() == null) {
 			throw new OrderException("Order without client");
 		}
-		if (order.getSews()==null || order.getSews().isEmpty()) {
+		if (order.getSews() == null || order.getSews().isEmpty()) {
 			throw new OrderException("Order without sew");
 		}
-		// Verificar se o Cliente Ja existe
-		Client client = clientRepository.loadByName(order.getClient().getName());
-		order = order.addClient(client!=null? client: order.getClient());
+		Order result= null;
+		try {
+			Client client = prepareClient(order.getClient());
+			order = order.addClient(client);
+			order.addSews(order.getSews());
+			result = repository.save(order);
+		} catch (Exception e) {
+			throw new OrderException();
+		}
 		
-		
-		
-		Order result = repository.save(order);
 		return result;
 	}
 

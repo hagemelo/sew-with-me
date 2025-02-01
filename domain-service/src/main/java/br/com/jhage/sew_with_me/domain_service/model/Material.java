@@ -14,7 +14,7 @@ import br.com.jhage.sew_with_me.domain_service.helper.ValoresConstante;
  */
 
 @Entity
-@Table
+@Table(name = "tb_material")
 public class Material implements JhageEntidade {
 
 	private static final long serialVersionUID = 1L;

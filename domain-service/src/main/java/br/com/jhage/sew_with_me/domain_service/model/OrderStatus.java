@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @since 30/03/2024
  *
  */
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum OrderStatus implements Serializable {
 
 	ABERTO("ABERTO"), 

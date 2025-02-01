@@ -4,11 +4,29 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.jhage.sew_with_me.domain_service.helper.ValoresConstante;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Version;
 
 /**
  * 
@@ -19,7 +37,7 @@ import br.com.jhage.sew_with_me.domain_service.helper.ValoresConstante;
  */
 
 @Entity
-@Table
+@Table(name = "tb_order")
 public class Order implements JhageEntidade {
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +50,7 @@ public class Order implements JhageEntidade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@JsonFormat(pattern = "dd/MM/YYYY")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone="GMT-3")
 	@Temporal(TemporalType.DATE)
 	private Date created_at;
 
@@ -41,14 +59,16 @@ public class Order implements JhageEntidade {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 
-	@JsonFormat(pattern = "dd/MM/YYYY")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone="GMT-3")
 	@Temporal(TemporalType.DATE)
 	private Date deliveryForecast;
 
-	@ManyToOne( cascade = CascadeType.ALL)
+	@ManyToOne( )
+	@Cascade({CascadeType.MERGE, CascadeType.PERSIST})
 	private Client client;
 
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, orphanRemoval = true)
+	@Cascade({CascadeType.MERGE, CascadeType.PERSIST})
 	private Set<Sew> sews;
 
 	Order() {
@@ -91,7 +111,28 @@ public class Order implements JhageEntidade {
 		}
 		this.value += sew.getValue();
 		this.sews.add(sew);
+		sew.addOrder(this);
 		return this;
+	}
+	
+	public Order addSews(Set<Sew> sews) {
+		
+		for (Sew sew : sews) {
+			this.addSew(sew);
+		}
+		return this;
+	}
+	
+	@JsonIgnore
+	public String getJsonValue() {
+
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return "";
+		}
 	}
 
 	@Override
