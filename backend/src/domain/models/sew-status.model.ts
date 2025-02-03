@@ -1,0 +1,7 @@
+export enum SewStatus {
+    NAO_INICIADO= 'NÃO INICIADO',
+    EM_PREPARACAO= 'EM PREPARAÇÃO', 
+    PARADO= 'PARADO', 
+    FINALIZADO= 'FINALIZADO',
+	ENTREGUE= 'ENTREGUE'
+}
